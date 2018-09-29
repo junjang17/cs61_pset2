@@ -1,0 +1,253 @@
+
+0000000000400e6b <_Z7phase_1Pc>:
+  400e6b:	48 83 ec 08          	sub    $0x8,%rsp
+  400e6f:	be 68 23 40 00       	mov    $0x402368,%esi
+  400e74:	e8 4b 04 00 00       	callq  4012c4 <_Z17strings_not_equalPKcS0_>
+  400e79:	85 c0                	test   %eax,%eax
+  400e7b:	75 05                	jne    400e82 <_Z7phase_1Pc+0x17>
+  400e7d:	48 83 c4 08          	add    $0x8,%rsp
+  400e81:	c3                   	retq   
+  400e82:	e8 1e 06 00 00       	callq  4014a5 <_Z12explode_bombv>
+  400e87:	eb f4                	jmp    400e7d <_Z7phase_1Pc+0x12>
+
+0000000000400e89 <_Z7phase_2Pc>:
+  400e89:	53                   	push   %rbx
+  400e8a:	48 83 ec 20          	sub    $0x20,%rsp
+  400e8e:	48 89 e6             	mov    %rsp,%rsi
+  400e91:	e8 45 06 00 00       	callq  4014db <_Z16read_six_numbersPKcPi>
+  400e96:	83 3c 24 00          	cmpl   $0x0,(%rsp)
+  400e9a:	78 07                	js     400ea3 <_Z7phase_2Pc+0x1a>
+  400e9c:	bb 01 00 00 00       	mov    $0x1,%ebx
+  400ea1:	eb 11                	jmp    400eb4 <_Z7phase_2Pc+0x2b>
+  400ea3:	e8 fd 05 00 00       	callq  4014a5 <_Z12explode_bombv>
+  400ea8:	eb f2                	jmp    400e9c <_Z7phase_2Pc+0x13>
+  400eaa:	48 83 c3 01          	add    $0x1,%rbx
+  400eae:	48 83 fb 06          	cmp    $0x6,%rbx
+  400eb2:	74 12                	je     400ec6 <_Z7phase_2Pc+0x3d>
+  400eb4:	89 d8                	mov    %ebx,%eax
+  400eb6:	03 44 9c fc          	add    -0x4(%rsp,%rbx,4),%eax
+  400eba:	39 04 9c             	cmp    %eax,(%rsp,%rbx,4)
+  400ebd:	74 eb                	je     400eaa <_Z7phase_2Pc+0x21>
+  400ebf:	e8 e1 05 00 00       	callq  4014a5 <_Z12explode_bombv>
+  400ec4:	eb e4                	jmp    400eaa <_Z7phase_2Pc+0x21>
+  400ec6:	48 83 c4 20          	add    $0x20,%rsp
+  400eca:	5b                   	pop    %rbx
+  400ecb:	c3                   	retq   
+
+0000000000400ecc <_Z7phase_3Pc>:
+  400ecc:	48 83 ec 18          	sub    $0x18,%rsp
+  400ed0:	48 8d 4c 24 08       	lea    0x8(%rsp),%rcx
+  400ed5:	48 8d 54 24 0c       	lea    0xc(%rsp),%rdx
+  400eda:	be 1d 26 40 00       	mov    $0x40261d,%esi
+  400edf:	b8 00 00 00 00       	mov    $0x0,%eax
+  400ee4:	e8 57 fc ff ff       	callq  400b40 <sscanf@plt>
+  400ee9:	83 f8 01             	cmp    $0x1,%eax
+  400eec:	7e 16                	jle    400f04 <_Z7phase_3Pc+0x38>
+  400eee:	83 7c 24 0c 07       	cmpl   $0x7,0xc(%rsp)
+  400ef3:	0f 87 82 00 00 00    	ja     400f7b <_Z7phase_3Pc+0xaf>
+  400ef9:	8b 44 24 0c          	mov    0xc(%rsp),%eax
+  400efd:	ff 24 c5 f0 23 40 00 	jmpq   *0x4023f0(,%rax,8)
+  400f04:	e8 9c 05 00 00       	callq  4014a5 <_Z12explode_bombv>
+  400f09:	eb e3                	jmp    400eee <_Z7phase_3Pc+0x22>
+  400f0b:	b8 24 01 00 00       	mov    $0x124,%eax
+  400f10:	eb 05                	jmp    400f17 <_Z7phase_3Pc+0x4b>
+  400f12:	b8 00 00 00 00       	mov    $0x0,%eax
+  400f17:	2d e7 02 00 00       	sub    $0x2e7,%eax
+  400f1c:	05 2c 03 00 00       	add    $0x32c,%eax
+  400f21:	2d 80 03 00 00       	sub    $0x380,%eax
+  400f26:	05 80 03 00 00       	add    $0x380,%eax
+  400f2b:	2d 80 03 00 00       	sub    $0x380,%eax
+  400f30:	05 80 03 00 00       	add    $0x380,%eax
+  400f35:	2d 80 03 00 00       	sub    $0x380,%eax
+  400f3a:	83 7c 24 0c 05       	cmpl   $0x5,0xc(%rsp)
+  400f3f:	7f 06                	jg     400f47 <_Z7phase_3Pc+0x7b>
+  400f41:	39 44 24 08          	cmp    %eax,0x8(%rsp)
+  400f45:	74 05                	je     400f4c <_Z7phase_3Pc+0x80>
+  400f47:	e8 59 05 00 00       	callq  4014a5 <_Z12explode_bombv>
+  400f4c:	48 83 c4 18          	add    $0x18,%rsp
+  400f50:	c3                   	retq   
+  400f51:	b8 00 00 00 00       	mov    $0x0,%eax
+  400f56:	eb c4                	jmp    400f1c <_Z7phase_3Pc+0x50>
+  400f58:	b8 00 00 00 00       	mov    $0x0,%eax
+  400f5d:	eb c2                	jmp    400f21 <_Z7phase_3Pc+0x55>
+  400f5f:	b8 00 00 00 00       	mov    $0x0,%eax
+  400f64:	eb c0                	jmp    400f26 <_Z7phase_3Pc+0x5a>
+  400f66:	b8 00 00 00 00       	mov    $0x0,%eax
+  400f6b:	eb be                	jmp    400f2b <_Z7phase_3Pc+0x5f>
+  400f6d:	b8 00 00 00 00       	mov    $0x0,%eax
+  400f72:	eb bc                	jmp    400f30 <_Z7phase_3Pc+0x64>
+  400f74:	b8 00 00 00 00       	mov    $0x0,%eax
+  400f79:	eb ba                	jmp    400f35 <_Z7phase_3Pc+0x69>
+  400f7b:	e8 25 05 00 00       	callq  4014a5 <_Z12explode_bombv>
+  400f80:	b8 00 00 00 00       	mov    $0x0,%eax
+  400f85:	eb b3                	jmp    400f3a <_Z7phase_3Pc+0x6e>
+
+0000000000400f87 <_Z5func4iii>:
+  400f87:	48 83 ec 08          	sub    $0x8,%rsp
+  400f8b:	89 d0                	mov    %edx,%eax
+  400f8d:	29 f0                	sub    %esi,%eax
+  400f8f:	89 c1                	mov    %eax,%ecx
+  400f91:	c1 e9 1f             	shr    $0x1f,%ecx
+  400f94:	01 c1                	add    %eax,%ecx
+  400f96:	d1 f9                	sar    %ecx
+  400f98:	01 f1                	add    %esi,%ecx
+  400f9a:	39 f9                	cmp    %edi,%ecx
+  400f9c:	7f 0e                	jg     400fac <_Z5func4iii+0x25>
+  400f9e:	b8 00 00 00 00       	mov    $0x0,%eax
+  400fa3:	39 f9                	cmp    %edi,%ecx
+  400fa5:	7c 11                	jl     400fb8 <_Z5func4iii+0x31>
+  400fa7:	48 83 c4 08          	add    $0x8,%rsp
+  400fab:	c3                   	retq   
+  400fac:	8d 51 ff             	lea    -0x1(%rcx),%edx
+  400faf:	e8 d3 ff ff ff       	callq  400f87 <_Z5func4iii>
+  400fb4:	01 c0                	add    %eax,%eax
+  400fb6:	eb ef                	jmp    400fa7 <_Z5func4iii+0x20>
+  400fb8:	8d 71 01             	lea    0x1(%rcx),%esi
+  400fbb:	e8 c7 ff ff ff       	callq  400f87 <_Z5func4iii>
+  400fc0:	8d 44 00 01          	lea    0x1(%rax,%rax,1),%eax
+  400fc4:	eb e1                	jmp    400fa7 <_Z5func4iii+0x20>
+
+0000000000400fc6 <_Z7phase_4Pc>:
+  400fc6:	48 83 ec 18          	sub    $0x18,%rsp
+  400fca:	48 8d 4c 24 08       	lea    0x8(%rsp),%rcx
+  400fcf:	48 8d 54 24 0c       	lea    0xc(%rsp),%rdx
+  400fd4:	be 1d 26 40 00       	mov    $0x40261d,%esi
+  400fd9:	b8 00 00 00 00       	mov    $0x0,%eax
+  400fde:	e8 5d fb ff ff       	callq  400b40 <sscanf@plt>
+  400fe3:	83 f8 02             	cmp    $0x2,%eax
+  400fe6:	75 07                	jne    400fef <_Z7phase_4Pc+0x29>
+  400fe8:	83 7c 24 0c 0e       	cmpl   $0xe,0xc(%rsp)
+  400fed:	76 05                	jbe    400ff4 <_Z7phase_4Pc+0x2e>
+  400fef:	e8 b1 04 00 00       	callq  4014a5 <_Z12explode_bombv>
+  400ff4:	ba 0e 00 00 00       	mov    $0xe,%edx
+  400ff9:	be 00 00 00 00       	mov    $0x0,%esi
+  400ffe:	8b 7c 24 0c          	mov    0xc(%rsp),%edi
+  401002:	e8 80 ff ff ff       	callq  400f87 <_Z5func4iii>
+  401007:	83 f8 05             	cmp    $0x5,%eax
+  40100a:	75 07                	jne    401013 <_Z7phase_4Pc+0x4d>
+  40100c:	83 7c 24 08 05       	cmpl   $0x5,0x8(%rsp)
+  401011:	74 05                	je     401018 <_Z7phase_4Pc+0x52>
+  401013:	e8 8d 04 00 00       	callq  4014a5 <_Z12explode_bombv>
+  401018:	48 83 c4 18          	add    $0x18,%rsp
+  40101c:	c3                   	retq   
+
+000000000040101d <_Z7phase_5Pc>:
+  40101d:	53                   	push   %rbx
+  40101e:	48 83 ec 10          	sub    $0x10,%rsp
+  401022:	48 89 fb             	mov    %rdi,%rbx
+  401025:	e8 7d 02 00 00       	callq  4012a7 <_Z13string_lengthPKc>
+  40102a:	83 f8 06             	cmp    $0x6,%eax
+  40102d:	75 3f                	jne    40106e <_Z7phase_5Pc+0x51>
+  40102f:	b8 00 00 00 00       	mov    $0x0,%eax
+  401034:	0f b6 14 03          	movzbl (%rbx,%rax,1),%edx
+  401038:	83 e2 0f             	and    $0xf,%edx
+  40103b:	0f b6 92 30 24 40 00 	movzbl 0x402430(%rdx),%edx
+  401042:	88 54 04 09          	mov    %dl,0x9(%rsp,%rax,1)
+  401046:	48 83 c0 01          	add    $0x1,%rax
+  40104a:	48 83 f8 06          	cmp    $0x6,%rax
+  40104e:	75 e4                	jne    401034 <_Z7phase_5Pc+0x17>
+  401050:	c6 44 24 0f 00       	movb   $0x0,0xf(%rsp)
+  401055:	be e6 23 40 00       	mov    $0x4023e6,%esi
+  40105a:	48 8d 7c 24 09       	lea    0x9(%rsp),%rdi
+  40105f:	e8 60 02 00 00       	callq  4012c4 <_Z17strings_not_equalPKcS0_>
+  401064:	85 c0                	test   %eax,%eax
+  401066:	75 0d                	jne    401075 <_Z7phase_5Pc+0x58>
+  401068:	48 83 c4 10          	add    $0x10,%rsp
+  40106c:	5b                   	pop    %rbx
+  40106d:	c3                   	retq   
+  40106e:	e8 32 04 00 00       	callq  4014a5 <_Z12explode_bombv>
+  401073:	eb ba                	jmp    40102f <_Z7phase_5Pc+0x12>
+  401075:	e8 2b 04 00 00       	callq  4014a5 <_Z12explode_bombv>
+  40107a:	eb ec                	jmp    401068 <_Z7phase_5Pc+0x4b>
+
+000000000040107c <_Z7phase_6Pc>:
+  40107c:	41 56                	push   %r14
+  40107e:	41 55                	push   %r13
+  401080:	41 54                	push   %r12
+  401082:	55                   	push   %rbp
+  401083:	53                   	push   %rbx
+  401084:	48 83 ec 50          	sub    $0x50,%rsp
+  401088:	48 8d 74 24 30       	lea    0x30(%rsp),%rsi
+  40108d:	e8 49 04 00 00       	callq  4014db <_Z16read_six_numbersPKcPi>
+  401092:	4c 8d 64 24 30       	lea    0x30(%rsp),%r12
+  401097:	4d 89 e5             	mov    %r12,%r13
+  40109a:	41 be 00 00 00 00    	mov    $0x0,%r14d
+  4010a0:	eb 26                	jmp    4010c8 <_Z7phase_6Pc+0x4c>
+  4010a2:	e8 fe 03 00 00       	callq  4014a5 <_Z12explode_bombv>
+  4010a7:	eb 2e                	jmp    4010d7 <_Z7phase_6Pc+0x5b>
+  4010a9:	83 c3 01             	add    $0x1,%ebx
+  4010ac:	83 fb 05             	cmp    $0x5,%ebx
+  4010af:	7f 13                	jg     4010c4 <_Z7phase_6Pc+0x48>
+  4010b1:	48 63 c3             	movslq %ebx,%rax
+  4010b4:	8b 44 84 30          	mov    0x30(%rsp,%rax,4),%eax
+  4010b8:	39 45 00             	cmp    %eax,0x0(%rbp)
+  4010bb:	75 ec                	jne    4010a9 <_Z7phase_6Pc+0x2d>
+  4010bd:	e8 e3 03 00 00       	callq  4014a5 <_Z12explode_bombv>
+  4010c2:	eb e5                	jmp    4010a9 <_Z7phase_6Pc+0x2d>
+  4010c4:	49 83 c5 04          	add    $0x4,%r13
+  4010c8:	4c 89 ed             	mov    %r13,%rbp
+  4010cb:	41 8b 45 00          	mov    0x0(%r13),%eax
+  4010cf:	83 e8 01             	sub    $0x1,%eax
+  4010d2:	83 f8 05             	cmp    $0x5,%eax
+  4010d5:	77 cb                	ja     4010a2 <_Z7phase_6Pc+0x26>
+  4010d7:	41 83 c6 01          	add    $0x1,%r14d
+  4010db:	41 83 fe 06          	cmp    $0x6,%r14d
+  4010df:	74 05                	je     4010e6 <_Z7phase_6Pc+0x6a>
+  4010e1:	44 89 f3             	mov    %r14d,%ebx
+  4010e4:	eb cb                	jmp    4010b1 <_Z7phase_6Pc+0x35>
+  4010e6:	49 8d 4c 24 18       	lea    0x18(%r12),%rcx
+  4010eb:	ba 07 00 00 00       	mov    $0x7,%edx
+  4010f0:	89 d0                	mov    %edx,%eax
+  4010f2:	41 2b 04 24          	sub    (%r12),%eax
+  4010f6:	41 89 04 24          	mov    %eax,(%r12)
+  4010fa:	49 83 c4 04          	add    $0x4,%r12
+  4010fe:	4c 39 e1             	cmp    %r12,%rcx
+  401101:	75 ed                	jne    4010f0 <_Z7phase_6Pc+0x74>
+  401103:	be 00 00 00 00       	mov    $0x0,%esi
+  401108:	eb 13                	jmp    40111d <_Z7phase_6Pc+0xa1>
+  40110a:	ba 00 35 60 00       	mov    $0x603500,%edx
+  40110f:	48 89 14 f4          	mov    %rdx,(%rsp,%rsi,8)
+  401113:	48 83 c6 01          	add    $0x1,%rsi
+  401117:	48 83 fe 06          	cmp    $0x6,%rsi
+  40111b:	74 20                	je     40113d <_Z7phase_6Pc+0xc1>
+  40111d:	8b 4c b4 30          	mov    0x30(%rsp,%rsi,4),%ecx
+  401121:	83 f9 01             	cmp    $0x1,%ecx
+  401124:	7e e4                	jle    40110a <_Z7phase_6Pc+0x8e>
+  401126:	b8 01 00 00 00       	mov    $0x1,%eax
+  40112b:	ba 00 35 60 00       	mov    $0x603500,%edx
+  401130:	48 8b 52 08          	mov    0x8(%rdx),%rdx
+  401134:	83 c0 01             	add    $0x1,%eax
+  401137:	39 c8                	cmp    %ecx,%eax
+  401139:	75 f5                	jne    401130 <_Z7phase_6Pc+0xb4>
+  40113b:	eb d2                	jmp    40110f <_Z7phase_6Pc+0x93>
+  40113d:	48 8b 1c 24          	mov    (%rsp),%rbx
+  401141:	48 8b 44 24 08       	mov    0x8(%rsp),%rax
+  401146:	48 89 43 08          	mov    %rax,0x8(%rbx)
+  40114a:	48 8b 54 24 10       	mov    0x10(%rsp),%rdx
+  40114f:	48 89 50 08          	mov    %rdx,0x8(%rax)
+  401153:	48 8b 44 24 18       	mov    0x18(%rsp),%rax
+  401158:	48 89 42 08          	mov    %rax,0x8(%rdx)
+  40115c:	48 8b 54 24 20       	mov    0x20(%rsp),%rdx
+  401161:	48 89 50 08          	mov    %rdx,0x8(%rax)
+  401165:	48 8b 44 24 28       	mov    0x28(%rsp),%rax
+  40116a:	48 89 42 08          	mov    %rax,0x8(%rdx)
+  40116e:	48 c7 40 08 00 00 00 	movq   $0x0,0x8(%rax)
+  401175:	00 
+  401176:	bd 05 00 00 00       	mov    $0x5,%ebp
+  40117b:	eb 09                	jmp    401186 <_Z7phase_6Pc+0x10a>
+  40117d:	48 8b 5b 08          	mov    0x8(%rbx),%rbx
+  401181:	83 ed 01             	sub    $0x1,%ebp
+  401184:	74 11                	je     401197 <_Z7phase_6Pc+0x11b>
+  401186:	48 8b 43 08          	mov    0x8(%rbx),%rax
+  40118a:	8b 00                	mov    (%rax),%eax
+  40118c:	39 03                	cmp    %eax,(%rbx)
+  40118e:	7d ed                	jge    40117d <_Z7phase_6Pc+0x101>
+  401190:	e8 10 03 00 00       	callq  4014a5 <_Z12explode_bombv>
+  401195:	eb e6                	jmp    40117d <_Z7phase_6Pc+0x101>
+  401197:	48 83 c4 50          	add    $0x50,%rsp
+  40119b:	5b                   	pop    %rbx
+  40119c:	5d                   	pop    %rbp
+  40119d:	41 5c                	pop    %r12
+  40119f:	41 5d                	pop    %r13
+  4011a1:	41 5e                	pop    %r14
+  4011a3:	c3                   	retq   
