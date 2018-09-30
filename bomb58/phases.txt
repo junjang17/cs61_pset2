@@ -1,53 +1,39 @@
-
-0000000000400e6b <_Z7phase_1Pc>:
-  400e6b:	48 83 ec 08          	sub    $0x8,%rsp
-  400e6f:	be 68 23 40 00       	mov    $0x402368,%esi
-  400e74:	e8 4b 04 00 00       	callq  4012c4 <_Z17strings_not_equalPKcS0_>
-  400e79:	85 c0                	test   %eax,%eax
-  400e7b:	75 05                	jne    400e82 <_Z7phase_1Pc+0x17>
-  400e7d:	48 83 c4 08          	add    $0x8,%rsp
-  400e81:	c3                   	retq   
-  400e82:	e8 1e 06 00 00       	callq  4014a5 <_Z12explode_bombv>
-  400e87:	eb f4                	jmp    400e7d <_Z7phase_1Pc+0x12>
-
-0000000000400e89 <_Z7phase_2Pc>:
-  400e89:	53                   	push   %rbx
-  400e8a:	48 83 ec 20          	sub    $0x20,%rsp
-  400e8e:	48 89 e6             	mov    %rsp,%rsi
-  400e91:	e8 45 06 00 00       	callq  4014db <_Z16read_six_numbersPKcPi>
-  400e96:	83 3c 24 00          	cmpl   $0x0,(%rsp)
-  400e9a:	78 07                	js     400ea3 <_Z7phase_2Pc+0x1a>
-  400e9c:	bb 01 00 00 00       	mov    $0x1,%ebx
-  400ea1:	eb 11                	jmp    400eb4 <_Z7phase_2Pc+0x2b>
-  400ea3:	e8 fd 05 00 00       	callq  4014a5 <_Z12explode_bombv>
-  400ea8:	eb f2                	jmp    400e9c <_Z7phase_2Pc+0x13>
-  400eaa:	48 83 c3 01          	add    $0x1,%rbx
-  400eae:	48 83 fb 06          	cmp    $0x6,%rbx
-  400eb2:	74 12                	je     400ec6 <_Z7phase_2Pc+0x3d>
-  400eb4:	89 d8                	mov    %ebx,%eax
-  400eb6:	03 44 9c fc          	add    -0x4(%rsp,%rbx,4),%eax
-  400eba:	39 04 9c             	cmp    %eax,(%rsp,%rbx,4)
-  400ebd:	74 eb                	je     400eaa <_Z7phase_2Pc+0x21>
-  400ebf:	e8 e1 05 00 00       	callq  4014a5 <_Z12explode_bombv>
-  400ec4:	eb e4                	jmp    400eaa <_Z7phase_2Pc+0x21>
-  400ec6:	48 83 c4 20          	add    $0x20,%rsp
-  400eca:	5b                   	pop    %rbx
-  400ecb:	c3                   	retq   
-
 0000000000400ecc <_Z7phase_3Pc>:
+  
+  // alloc off stack
   400ecc:	48 83 ec 18          	sub    $0x18,%rsp
-  400ed0:	48 8d 4c 24 08       	lea    0x8(%rsp),%rcx
+
+  // load content of [%rsp + 8 bytes] (some sort of input array?) into rcx (4th arg)
+  400ed0:	48 8d 4c 24 08       	lea    0x8(%rsp),%rcx 
+  
+  // load content of [%rsp + 12 bytes] into %rdx (3rd arg)
   400ed5:	48 8d 54 24 0c       	lea    0xc(%rsp),%rdx
+
+  // move value 0x40261d into %esi (2nd arg...rsi)
   400eda:	be 1d 26 40 00       	mov    $0x40261d,%esi
+
+  // Set eax to 0
   400edf:	b8 00 00 00 00       	mov    $0x0,%eax
+
+  // take input string and break it up into some format, eax becomes number of elts
   400ee4:	e8 57 fc ff ff       	callq  400b40 <sscanf@plt>
+
+  // if %eax == 1, BLOW UP
   400ee9:	83 f8 01             	cmp    $0x1,%eax
   400eec:	7e 16                	jle    400f04 <_Z7phase_3Pc+0x38>
+
+  // if 0xc(%rsp) (content at %rsp 12 bytes in) is 7, blow up
   400eee:	83 7c 24 0c 07       	cmpl   $0x7,0xc(%rsp)
   400ef3:	0f 87 82 00 00 00    	ja     400f7b <_Z7phase_3Pc+0xaf>
+
+  // else %eax = %rsp moved 12 bytes in, and move to 
   400ef9:	8b 44 24 0c          	mov    0xc(%rsp),%eax
   400efd:	ff 24 c5 f0 23 40 00 	jmpq   *0x4023f0(,%rax,8)
+  
+  // BOMB
   400f04:	e8 9c 05 00 00       	callq  4014a5 <_Z12explode_bombv>
+ 
+
   400f09:	eb e3                	jmp    400eee <_Z7phase_3Pc+0x22>
   400f0b:	b8 24 01 00 00       	mov    $0x124,%eax
   400f10:	eb 05                	jmp    400f17 <_Z7phase_3Pc+0x4b>
@@ -63,7 +49,10 @@
   400f3f:	7f 06                	jg     400f47 <_Z7phase_3Pc+0x7b>
   400f41:	39 44 24 08          	cmp    %eax,0x8(%rsp)
   400f45:	74 05                	je     400f4c <_Z7phase_3Pc+0x80>
+  
+  // BOMB
   400f47:	e8 59 05 00 00       	callq  4014a5 <_Z12explode_bombv>
+  
   400f4c:	48 83 c4 18          	add    $0x18,%rsp
   400f50:	c3                   	retq   
   400f51:	b8 00 00 00 00       	mov    $0x0,%eax
@@ -78,7 +67,10 @@
   400f72:	eb bc                	jmp    400f30 <_Z7phase_3Pc+0x64>
   400f74:	b8 00 00 00 00       	mov    $0x0,%eax
   400f79:	eb ba                	jmp    400f35 <_Z7phase_3Pc+0x69>
+  
+  // BOMB
   400f7b:	e8 25 05 00 00       	callq  4014a5 <_Z12explode_bombv>
+  
   400f80:	b8 00 00 00 00       	mov    $0x0,%eax
   400f85:	eb b3                	jmp    400f3a <_Z7phase_3Pc+0x6e>
 
